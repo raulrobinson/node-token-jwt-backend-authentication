@@ -1,3 +1,2 @@
-const db =
-  'mongodb://localhost:27017/meanauthdb?connectTimeoutMS=1000&bufferCommands=false&authSource=otherdb'
+const db = 'mongodb://127.0.0.1:27017/mydatabase'
 

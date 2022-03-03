@@ -1,28 +1,19 @@
 const express = require('express')
-const mongoose = require('mongoose')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const dbConfig = require('./database/db')
+const mongoose = require('mongoose')
 
 // Express APIs
 const api = require('./routes/auth.routes')
 
-// MongoDB conection
-var mongoURI
-mongoose.connection.on('open', function (ref) {
-  console.log('Connected to mongo server.')
-  return start_up()
-})
-
-mongoose.connection.on('error', function (err) {
-  console.log('Could not connect to mongo server!')
-  return console.log(err)
-})
-
-mongoURI = dbConfig
-
-// Remvoe MongoDB warning error
-mongoose.set('useCreateIndex', true)
+mongoose
+  .connect('mongodb://127.0.0.1:27017/mydatabase')
+  .then((x) => {
+    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
+  })
+  .catch((err) => {
+    console.error('Error connecting to mongo', err.reason)
+  })
 
 // Express settings
 const app = express()
@@ -36,11 +27,11 @@ app.use(cors())
 
 // Serve static resources
 app.use('/public', express.static('public'))
-
 app.use('/api', api)
 
 // Define PORT
 const port = process.env.PORT || 4000
+
 const server = app.listen(port, () => {
   console.log('Connected to port ' + port)
 })
