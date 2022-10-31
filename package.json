@@ -1,16 +1,19 @@
 {
-  "name": "node-token-based-authentication",
+  "name": "token-based-authentication",
   "version": "1.0.0",
   "description": "A node token token-based user authentication REST API",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Digamber",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.1",
+    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
+    "bootstrap": "^5.2.2",
     "config": "^3.3.7",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
@@ -21,6 +24,15 @@
     "mongoose-unique-validator": "^3.1.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
-  }
+    "nodemon": "^2.0.20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SinghDigamber/node-token-based-authentication.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/SinghDigamber/node-token-based-authentication/issues"
+  },
+  "homepage": "https://github.com/SinghDigamber/node-token-based-authentication#readme"
 }

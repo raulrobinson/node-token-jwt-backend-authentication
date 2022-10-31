@@ -6,7 +6,9 @@ const userSchema = require('../models/User')
 const authorize = require('../middlewares/auth')
 const { check, validationResult } = require('express-validator')
 
-// Sign-up
+/**
+ * SIGN-UP
+ */
 router.post(
   '/register-user',
   [
@@ -52,7 +54,9 @@ router.post(
   },
 )
 
-// Sign-in
+/**
+ * SIGN-IN
+ */
 router.post('/signin', (req, res, next) => {
   let getUser
   userSchema
@@ -60,10 +64,14 @@ router.post('/signin', (req, res, next) => {
       email: req.body.email,
     })
     .then((user) => {
+      //console.log(res)
+      //console.log(req.body)
       if (!user) {
-        return res.status(401).json({
+        /*return res.status(401).json({
           message: 'Authentication failed',
-        })
+        })*/
+        res.status(404).json({ errors });
+        return
       }
       getUser = user
       return bcrypt.compare(req.body.password, user.password)
@@ -97,7 +105,9 @@ router.post('/signin', (req, res, next) => {
     })
 })
 
-// Get Users
+/**
+ * GET ALL USERS
+ */
 router.route('/').get((req, res, next) => {
   userSchema.find((error, response)=> {
     if (error) {
@@ -108,8 +118,9 @@ router.route('/').get((req, res, next) => {
   })
 })
 
-
-// Get Single User
+/**
+ * GET SINGLE USER
+ */
 router.route('/user-profile/:id').get(authorize, (req, res, next) => {
   userSchema.findById(req.params.id, (error, data) => {
     if (error) {
@@ -122,7 +133,9 @@ router.route('/user-profile/:id').get(authorize, (req, res, next) => {
   })
 })
 
-// Update User
+/**
+ * UPDATE USER
+ */
 router.route('/update-user/:id').put((req, res, next) => {
   userSchema.findByIdAndUpdate(
     req.params.id,
@@ -140,7 +153,9 @@ router.route('/update-user/:id').put((req, res, next) => {
   )
 })
 
-// Delete User
+/**
+ * DELETE USER
+ */
 router.route('/delete-user/:id').delete((req, res, next) => {
   userSchema.findByIdAndRemove(req.params.id, (error, data) => {
     if (error) {

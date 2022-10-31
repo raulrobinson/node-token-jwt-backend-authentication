@@ -7,7 +7,8 @@ const mongoose = require('mongoose')
 const api = require('./routes/auth.routes')
 
 mongoose
-  .connect('mongodb://127.0.0.1:27017/mydatabase')
+  //.connect('mongodb://127.0.0.1:27017/mydatabase')
+  .connect('mongodb+srv://raulrobinson74:vNQR51AgM3CW2YgQ@instancia0.gvn9uuf.mongodb.net/?retryWrites=true&w=majority')
   .then((x) => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
